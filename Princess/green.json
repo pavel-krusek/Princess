@@ -1,7 +1,39 @@
 {
     "princess": [
                  {
+                 "name": "boty",
+                 "type": "static",
+                 "asset": "shoes.png",
+                 "position": [
+                              362,
+                              100
+                              ]
+                 },
+                 {
+                 "name": "zavoj",
+                 "type": "touchable",
+                 "touchData": "_green_2",
+                 "position": [
+                              36,
+                              230
+                              ],
+                 "stroke": [
+                            "none",
+                            0,
+                            0,
+                            0
+                            ],
+                 "piece": [
+                           "cl_2_green.png",
+                           0,
+                           0,
+                           1
+                           ]
+                 },
+                 {
                  "name": "sukne",
+                 "type": "touchable",
+                 "touchData": "_green_1",
                  "position": [
                               4,
                               90
@@ -14,8 +46,8 @@
                             ],
                  "piece": [
                            "cl_1_green.png",
-                           19,
-                           23,
+                           20,
+                           25,
                            2
                            ]
                  }

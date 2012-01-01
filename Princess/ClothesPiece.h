@@ -22,7 +22,7 @@
 @property (nonatomic, assign, readonly) NSData *lookupData;
 
 - (void) addPattern:(CGPoint)touchLocation pattern:(NSString *)pattern;
-- (void) constructPiece:(Piece)stroke piece:(Piece)p;
+- (void) constructPiece:(Piece)stroke piece:(Piece)p touchData:(NSString *)data;
 - (int) getValueAtPoint:(CGPoint)pt;
  
 

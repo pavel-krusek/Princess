@@ -50,18 +50,19 @@
     return retValue;
 }
 
-- (void) constructPiece:(Piece)stroke piece:(Piece)p {
+- (void) constructPiece:(Piece)stroke piece:(Piece)p touchData:(NSString *)data {
     NSString *filePath = 
-    [[NSBundle mainBundle] pathForResource:@"_green_1" ofType:@"raw"];  
+    [[NSBundle mainBundle] pathForResource:data ofType:@"raw"];  
     
-    // load it as NSData
     lookupData = [NSData dataWithContentsOfFile:filePath];
     [lookupData retain];    
     
-    CCSprite *shadow = [CCSprite spriteWithSpriteFrameName:stroke.source];
-    shadow.position = ccp(stroke.xPos, stroke.yPos);
-    shadow.anchorPoint = ccp(0, 0);
-    [self addChild:shadow z:stroke.z];
+    if (![stroke.source isEqualToString:@"none"]) {
+        CCSprite *shadow = [CCSprite spriteWithSpriteFrameName:stroke.source];
+        shadow.position = ccp(stroke.xPos, stroke.yPos);
+        shadow.anchorPoint = ccp(0, 0);
+        [self addChild:shadow z:stroke.z];
+    }
     
     CCSprite *obj = [CCSprite spriteWithSpriteFrameName:p.source];
     obj.opacity = 0;

@@ -176,6 +176,8 @@
 		A31E634714AE319400900C9E /* testVzor.png in Resources */ = {isa = PBXBuildFile; fileRef = A31E632D14AE319400900C9E /* testVzor.png */; };
 		A334563C149F4886004B01CD /* ClothesPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = A334563B149F4886004B01CD /* ClothesPiece.m */; };
 		A36E663914AF84E000A60A83 /* green.json in Resources */ = {isa = PBXBuildFile; fileRef = A36E663814AF84E000A60A83 /* green.json */; };
+		A36E664114B097C300A60A83 /* _green_2.raw in Resources */ = {isa = PBXBuildFile; fileRef = A36E664014B097C300A60A83 /* _green_2.raw */; };
+		A36E664314B0AFB300A60A83 /* _green.raw in Resources */ = {isa = PBXBuildFile; fileRef = A36E664214B0AFB300A60A83 /* _green.raw */; };
 		A389D33F149CE4FF0037DEA6 /* assets.plist in Resources */ = {isa = PBXBuildFile; fileRef = A389D33A149CE4FF0037DEA6 /* assets.plist */; };
 		A389D340149CE4FF0037DEA6 /* assets.pvr.ccz in Resources */ = {isa = PBXBuildFile; fileRef = A389D33B149CE4FF0037DEA6 /* assets.pvr.ccz */; };
 		A389D341149CE4FF0037DEA6 /* assets.tps in Resources */ = {isa = PBXBuildFile; fileRef = A389D33C149CE4FF0037DEA6 /* assets.tps */; };
@@ -475,6 +477,8 @@
 		A334563A149F4886004B01CD /* ClothesPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClothesPiece.h; sourceTree = "<group>"; };
 		A334563B149F4886004B01CD /* ClothesPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClothesPiece.m; sourceTree = "<group>"; };
 		A36E663814AF84E000A60A83 /* green.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = green.json; sourceTree = "<group>"; };
+		A36E664014B097C300A60A83 /* _green_2.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _green_2.raw; sourceTree = "<group>"; };
+		A36E664214B0AFB300A60A83 /* _green.raw */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = _green.raw; sourceTree = "<group>"; };
 		A389D33A149CE4FF0037DEA6 /* assets.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = assets.plist; sourceTree = "<group>"; };
 		A389D33B149CE4FF0037DEA6 /* assets.pvr.ccz */ = {isa = PBXFileReference; lastKnownFileType = file; path = assets.pvr.ccz; sourceTree = "<group>"; };
 		A389D33C149CE4FF0037DEA6 /* assets.tps */ = {isa = PBXFileReference; lastKnownFileType = file; path = assets.tps; sourceTree = "<group>"; };
@@ -897,6 +901,8 @@
 		A30BF92014A2154D008F68A6 /* touchData */ = {
 			isa = PBXGroup;
 			children = (
+				A36E664214B0AFB300A60A83 /* _green.raw */,
+				A36E664014B097C300A60A83 /* _green_2.raw */,
 				A30BF92114A2154D008F68A6 /* _green_1.raw */,
 				A30BF92214A2154D008F68A6 /* convert.py */,
 				A30BF92314A2154D008F68A6 /* green_1.raw */,
@@ -1102,6 +1108,8 @@
 				A3023F7814AE5F090029DE70 /* p9 in Resources */,
 				A3023F8014AF12BC0029DE70 /* pinchOrange.png in Resources */,
 				A36E663914AF84E000A60A83 /* green.json in Resources */,
+				A36E664114B097C300A60A83 /* _green_2.raw in Resources */,
+				A36E664314B0AFB300A60A83 /* _green.raw in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

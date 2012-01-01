@@ -115,11 +115,22 @@ enum {
 
 - (void)onEnter {
     [[CCTouchDispatcher sharedDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
-//    UITapGestureRecognizer *singleTapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)] autorelease];
-//    [[[CCDirector sharedDirector] openGLView] addGestureRecognizer:singleTapRecognizer];
-//    singleTapRecognizer.cancelsTouchesInView = NO;
-    
     [super onEnter];
+}
+
+- (int) getValueAtPoint:(CGPoint)pt {
+    int retValue = 255;
+    
+    if(lookupData) 
+    {
+        pt.y = self.contentSize.height - pt.y;
+        int offset = pt.y * self.contentSize.width + pt.x;
+        NSRange range = {offset,sizeof(Byte)};
+        NSData *pixelValue = [lookupData subdataWithRange:range];  
+        
+        retValue = *(int*)[pixelValue bytes];
+    }
+    return retValue;
 }
 
 - (void) selectSpriteForTouch:(CGPoint)touchLocation {
@@ -131,22 +142,39 @@ enum {
         }
     }
     
-    ClothesPiece *clothSprite = nil;
-    for (ClothesPiece *sprite in clothesArray) {
+//    ClothesPiece *clothSprite = nil;
+//    for (ClothesPiece *sprite in clothesArray) {
+////        if (CGRectContainsPoint(sprite.piece.boundingBox, [sprite convertToNodeSpace:touchLocation])) {
+////            clothSprite = sprite;
+////            break;
+////        }
 //        if (CGRectContainsPoint(sprite.piece.boundingBox, [sprite convertToNodeSpace:touchLocation])) {
-//            clothSprite = sprite;
+//            CGPoint loc = [sprite.piece convertToNodeSpace:touchLocation];
+//            int value = [sprite getValueAtPoint:loc];
+//            CCLOG(@"%i", value);
+//            if (value == 1) {
+//                clothSprite = sprite;
+//            }
 //            break;
 //        }
-        if (CGRectContainsPoint(sprite.piece.boundingBox, [sprite convertToNodeSpace:touchLocation])) {
-            CGPoint loc = [sprite.piece convertToNodeSpace:touchLocation];
-            int value = [sprite getValueAtPoint:loc];
-            CCLOG(@"%i", value);
-            if (value == 1) {
-                clothSprite = sprite;
-            }
+//    }
+    ClothesPiece *clothSprite = nil;
+    CGPoint loc = [self convertToNodeSpace:touchLocation];
+    int value = [self getValueAtPoint:loc];
+    //CCLOG(@"%i", value);
+    switch (value) {
+        case 1:
+            clothSprite = [clothesArray objectAtIndex:1];
             break;
-        }
+        case 2:
+            clothSprite = [clothesArray objectAtIndex:0];
+            break;
+        case 3:
+            break;
+        default:                       
+            break;
     }
+    CCLOG(@"PIECE %@", clothSprite);
     
     PatternButton *patternSprite = nil;
     for (PatternButton *sprite in patterns) {
@@ -201,12 +229,12 @@ enum {
 	// always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super initWithColor:ccc4(255,255,255,255)])) {
-//        NSString *filePath = 
-//        [[NSBundle mainBundle] pathForResource:@"_green_1" ofType:@"raw"];  
-//        
-//        // load it as NSData
-//        lookupData = [NSData dataWithContentsOfFile:filePath];
-//        [lookupData retain];
+        NSString *filePath = 
+        [[NSBundle mainBundle] pathForResource:@"_green" ofType:@"raw"];  
+        
+        // load it as NSData
+        lookupData = [NSData dataWithContentsOfFile:filePath];
+        [lookupData retain];
         
 		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"assets.plist"];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"green.plist"];
@@ -273,28 +301,37 @@ enum {
     [self handleError:error];
     NSArray *dataArray = [resultsDictionary objectForKey:@"princess"];
     for (NSDictionary *pDictionary in dataArray) {
-        NSArray *positionArray = [pDictionary objectForKey:@"position"];
-        NSArray *strokeArray = [pDictionary objectForKey:@"stroke"];
-        NSArray *pieceArray = [pDictionary objectForKey:@"piece"];
-        Piece stroke;
-        stroke.source = [strokeArray objectAtIndex:0];
-        stroke.xPos = [[strokeArray objectAtIndex:1] floatValue];
-        stroke.yPos = [[strokeArray objectAtIndex:2] floatValue];
-        stroke.z = [[strokeArray objectAtIndex:3] intValue];
-        Piece piece;
-        piece.source = [pieceArray objectAtIndex:0];
-        piece.xPos = [[pieceArray objectAtIndex:1] floatValue];
-        piece.yPos = [[pieceArray objectAtIndex:2] floatValue];
-        piece.z = [[pieceArray objectAtIndex:3] intValue];
-        
-        ClothesPiece *p = [ClothesPiece node];
-        [p constructPiece:stroke piece:piece];
-        p.position = ccp([[positionArray objectAtIndex:0] floatValue], [[positionArray objectAtIndex:1] floatValue]);
-        
-        [self addChild:p];
-        [clothesArray addObject:p];
+        NSString *objType = [pDictionary objectForKey:@"type"];
+        if ([objType isEqualToString:@"static"]) {
+            CCSprite *sprite = [CCSprite spriteWithSpriteFrameName:[pDictionary objectForKey:@"asset"]];
+            NSArray *positionArray = [pDictionary objectForKey:@"position"];
+            sprite.position = ccp([[positionArray objectAtIndex:0] floatValue], [[positionArray objectAtIndex:1] floatValue]);
+            sprite.anchorPoint = ccp(0, 0);
+            [self addChild:sprite];
+        }
+        if ([objType isEqualToString:@"touchable"]) {
+            NSArray *positionArray = [pDictionary objectForKey:@"position"];
+            NSArray *strokeArray = [pDictionary objectForKey:@"stroke"];
+            NSArray *pieceArray = [pDictionary objectForKey:@"piece"];
+            Piece stroke;
+            stroke.source = [strokeArray objectAtIndex:0];
+            stroke.xPos = [[strokeArray objectAtIndex:1] floatValue];
+            stroke.yPos = [[strokeArray objectAtIndex:2] floatValue];
+            stroke.z = [[strokeArray objectAtIndex:3] intValue];
+            Piece piece;
+            piece.source = [pieceArray objectAtIndex:0];
+            piece.xPos = [[pieceArray objectAtIndex:1] floatValue];
+            piece.yPos = [[pieceArray objectAtIndex:2] floatValue];
+            piece.z = [[pieceArray objectAtIndex:3] intValue];
+            
+            ClothesPiece *p = [ClothesPiece node];
+            [p constructPiece:stroke piece:piece touchData:[pDictionary objectForKey:@"touchData"]];
+            p.position = ccp([[positionArray objectAtIndex:0] floatValue], [[positionArray objectAtIndex:1] floatValue]);
+            
+            [self addChild:p];
+            [clothesArray addObject:p];
+        }
     }
-
 }
 
 #pragma mark -
