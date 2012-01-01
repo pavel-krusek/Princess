@@ -92,6 +92,130 @@
                            1,
                            1
                            ]
+                 },
+                 {
+                 "name": "pravy rukav",
+                 "type": "touchable",
+                 "touchData": "5",
+                 "sizePatterns": "0.5, 0.7",
+                 "position": [
+                              472,
+                              498
+                              ],
+                 "stroke": [
+                            "sh_5_green.png",
+                            0,
+                            0,
+                            2
+                            ],
+                 "piece": [
+                           "cl_5_green.png",
+                           2,
+                           1,
+                           1
+                           ]
+                 },
+                 {
+                 "name": "pravy rukav maly",
+                 "type": "touchable",
+                 "touchData": "6",
+                 "position": [
+                              526,
+                              491
+                              ],
+                 "stroke": [
+                            "sh_6_green.png",
+                            0,
+                            0,
+                            2
+                            ],
+                 "piece": [
+                           "cl_6_green.png",
+                           0,
+                           2,
+                           1
+                           ]
+                 },
+                 {
+                 "name": "leva ruka",
+                 "type": "static",
+                 "asset": "left_hand.png",
+                 "position": [
+                              369,
+                              312
+                              ]
+                 },
+                 {
+                 "name": "levy rukav maly",
+                 "type": "touchable",
+                 "touchData": "7",
+                 "position": [
+                              359,
+                              452
+                              ],
+                 "stroke": [
+                            "sh_7_green.png",
+                            0,
+                            0,
+                            2
+                            ],
+                 "piece": [
+                           "cl_7_green.png",
+                           1,
+                           2,
+                           1
+                           ]
+                 },
+                 {
+                 "name": "levy rukav",
+                 "type": "touchable",
+                 "touchData": "8",
+                 "position": [
+                              323,
+                              487
+                              ],
+                 "stroke": [
+                            "sh_8_green.png",
+                            0,
+                            0,
+                            2
+                            ],
+                 "piece": [
+                           "cl_8_green.png",
+                           1,
+                           1,
+                           1
+                           ]
+                 },
+                 {
+                 "name": "krk",
+                 "type": "static",
+                 "asset": "krk.png",
+                 "position": [
+                              413,
+                              536
+                              ]
+                 },
+                 {
+                 "name": "bluza",
+                 "type": "touchable",
+                 "touchData": "9",
+                 "position": [
+                              412,
+                              487
+                              ],
+                 "stroke": [
+                            "sh_9_green.png",
+                            0,
+                            0,
+                            2
+                            ],
+                 "piece": [
+                           "cl_9_green.png",
+                           1,
+                           1,
+                           1
+                           ]
                  }
                  ]
 }

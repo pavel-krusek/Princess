@@ -24,22 +24,26 @@
 - (void) constructPiece:(Piece)stroke piece:(Piece)p {
     if (![stroke.source isEqualToString:@"none"]) {
         CCSprite *shadow = [CCSprite spriteWithSpriteFrameName:stroke.source];
+        //CCSprite *shadow = [CCSprite spriteWithFile:stroke.source];
         shadow.position = ccp(stroke.xPos, stroke.yPos);
         shadow.anchorPoint = ccp(0, 0);
         [self addChild:shadow z:stroke.z];
     }
     
     CCSprite *obj = [CCSprite spriteWithSpriteFrameName:p.source];
+    //CCSprite *obj = [CCSprite spriteWithFile:p.source];
     obj.opacity = 0;
     obj.position = ccp(p.xPos, p.yPos);
     obj.anchorPoint = ccp(0, 0);
     
     piece = [CCSprite spriteWithSpriteFrameName:p.source];
+    //piece = [CCSprite spriteWithFile:p.source];
     piece.anchorPoint = ccp(0, 0);
     piece.position = ccp(p.xPos, p.yPos);
     [self addChild:piece z:p.z];
     
     mask = [CCSprite spriteWithSpriteFrameName:p.source];
+    //mask = [CCSprite spriteWithFile:p.source];
     mask.position = ccp(p.xPos, p.yPos);
     mask.anchorPoint = ccp(0, 0);
     

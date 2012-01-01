@@ -115,6 +115,7 @@
 - (void) mask {
     // Set up the burn sprite that will "knock out" parts of the darkness layer depending on the alpha value of the pixels in the image.
     [maskSprite setBlendFunc: (ccBlendFunc) {  GL_ZERO, GL_ONE_MINUS_SRC_ALPHA }];
+    //[maskSprite setBlendFunc: (ccBlendFunc) {  GL_ONE, GL_ZERO }];
     [maskSprite setOpacityModifyRGB:NO];
     [maskSprite retain];
     
@@ -141,6 +142,7 @@
     
     // Set up the burn sprite that will "knock out" parts of the darkness layer depending on the alpha value of the pixels in the image.
     [maskCut setBlendFunc: (ccBlendFunc) { GL_ZERO, GL_ONE_MINUS_SRC_ALPHA }];
+    //[maskCut setBlendFunc: (ccBlendFunc) {  GL_ONE, GL_ZERO }];
     [maskCut setOpacityModifyRGB:NO];
     [maskCut retain];
     

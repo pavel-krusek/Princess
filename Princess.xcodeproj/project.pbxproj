@@ -172,7 +172,6 @@
 		A31E634314AE319400900C9E /* room.png in Resources */ = {isa = PBXBuildFile; fileRef = A31E632914AE319400900C9E /* room.png */; };
 		A31E634414AE319400900C9E /* sky.png in Resources */ = {isa = PBXBuildFile; fileRef = A31E632A14AE319400900C9E /* sky.png */; };
 		A31E634514AE319400900C9E /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = A31E632B14AE319400900C9E /* sun.png */; };
-		A31E634614AE319400900C9E /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = A31E632C14AE319400900C9E /* test.png */; };
 		A31E634714AE319400900C9E /* testVzor.png in Resources */ = {isa = PBXBuildFile; fileRef = A31E632D14AE319400900C9E /* testVzor.png */; };
 		A334563C149F4886004B01CD /* ClothesPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = A334563B149F4886004B01CD /* ClothesPiece.m */; };
 		A36E663914AF84E000A60A83 /* green.json in Resources */ = {isa = PBXBuildFile; fileRef = A36E663814AF84E000A60A83 /* green.json */; };
@@ -472,7 +471,6 @@
 		A31E632914AE319400900C9E /* room.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room.png; sourceTree = "<group>"; };
 		A31E632A14AE319400900C9E /* sky.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sky.png; sourceTree = "<group>"; };
 		A31E632B14AE319400900C9E /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun.png; sourceTree = "<group>"; };
-		A31E632C14AE319400900C9E /* test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.png; sourceTree = "<group>"; };
 		A31E632D14AE319400900C9E /* testVzor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testVzor.png; sourceTree = "<group>"; };
 		A334563A149F4886004B01CD /* ClothesPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClothesPiece.h; sourceTree = "<group>"; };
 		A334563B149F4886004B01CD /* ClothesPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClothesPiece.m; sourceTree = "<group>"; };
@@ -947,7 +945,6 @@
 				A31E632914AE319400900C9E /* room.png */,
 				A31E632A14AE319400900C9E /* sky.png */,
 				A31E632B14AE319400900C9E /* sun.png */,
-				A31E632C14AE319400900C9E /* test.png */,
 				A31E632D14AE319400900C9E /* testVzor.png */,
 			);
 			path = textures;
@@ -1085,7 +1082,6 @@
 				A31E634314AE319400900C9E /* room.png in Resources */,
 				A31E634414AE319400900C9E /* sky.png in Resources */,
 				A31E634514AE319400900C9E /* sun.png in Resources */,
-				A31E634614AE319400900C9E /* test.png in Resources */,
 				A31E634714AE319400900C9E /* testVzor.png in Resources */,
 				A3023F5914AE531D0029DE70 /* pb2.png in Resources */,
 				A3023F5A14AE531D0029DE70 /* pb3.png in Resources */,
@@ -1232,7 +1228,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zdenek Strnad (BBBF79HQ36)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zdenek Strnad (BBBF79HQ36)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1244,7 +1241,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "C78BFE3F-F149-46C2-A17C-6339FEE69337";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C78BFE3F-F149-46C2-A17C-6339FEE69337";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -1252,7 +1252,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Zdenek Strnad (BBBF79HQ36)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Zdenek Strnad (BBBF79HQ36)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1260,7 +1261,10 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "C78BFE3F-F149-46C2-A17C-6339FEE69337";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C78BFE3F-F149-46C2-A17C-6339FEE69337";
 				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -1276,11 +1280,12 @@
 				GCC_PREFIX_HEADER = Princess/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = Princess/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4B057239-42EA-40A0-8360-CFC43BBF7428";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "C78BFE3F-F149-46C2-A17C-6339FEE69337";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C78BFE3F-F149-46C2-A17C-6339FEE69337";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1296,10 +1301,12 @@
 				GCC_PREFIX_HEADER = Princess/Prefix.pch;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				INFOPLIST_FILE = Princess/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "C78BFE3F-F149-46C2-A17C-6339FEE69337";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "C78BFE3F-F149-46C2-A17C-6339FEE69337";
+				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};

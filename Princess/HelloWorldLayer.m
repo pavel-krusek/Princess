@@ -311,7 +311,7 @@ enum {
             ClothesPiece *p = [ClothesPiece node];
             [p constructPiece:stroke piece:piece];
             p.position = ccp([[positionArray objectAtIndex:0] floatValue], [[positionArray objectAtIndex:1] floatValue]);
-            
+            CCLOG(@"%@", p);
             [self addChild:p];
             //[clothesArray addObject:p];
             [clothesDictionary setObject:p forKey:[pDictionary objectForKey:@"touchData"]];
