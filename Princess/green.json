@@ -12,7 +12,7 @@
                  {
                  "name": "zavoj",
                  "type": "touchable",
-                 "touchData": "_green_2",
+                 "touchData": "2",
                  "position": [
                               36,
                               230
@@ -33,7 +33,7 @@
                  {
                  "name": "sukne",
                  "type": "touchable",
-                 "touchData": "_green_1",
+                 "touchData": "1",
                  "position": [
                               4,
                               90
@@ -49,6 +49,48 @@
                            20,
                            25,
                            2
+                           ]
+                 },
+                 {
+                 "name": "levy kanyr",
+                 "type": "touchable",
+                 "touchData": "3",
+                 "position": [
+                              23,
+                              190
+                              ],
+                 "stroke": [
+                            "sh_3_green.png",
+                            0,
+                            0,
+                            2
+                            ],
+                 "piece": [
+                           "cl_3_green.png",
+                           1,
+                           2,
+                           1
+                           ]
+                 },
+                 {
+                 "name": "pravy kanyr",
+                 "type": "touchable",
+                 "touchData": "4",
+                 "position": [
+                              455,
+                              140
+                              ],
+                 "stroke": [
+                            "sh_4_green.png",
+                            0,
+                            0,
+                            2
+                            ],
+                 "piece": [
+                           "cl_4_green.png",
+                           1,
+                           1,
+                           1
                            ]
                  }
                  ]

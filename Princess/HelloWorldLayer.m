@@ -142,39 +142,22 @@ enum {
         }
     }
     
-//    ClothesPiece *clothSprite = nil;
-//    for (ClothesPiece *sprite in clothesArray) {
-////        if (CGRectContainsPoint(sprite.piece.boundingBox, [sprite convertToNodeSpace:touchLocation])) {
-////            clothSprite = sprite;
-////            break;
-////        }
-//        if (CGRectContainsPoint(sprite.piece.boundingBox, [sprite convertToNodeSpace:touchLocation])) {
-//            CGPoint loc = [sprite.piece convertToNodeSpace:touchLocation];
-//            int value = [sprite getValueAtPoint:loc];
-//            CCLOG(@"%i", value);
-//            if (value == 1) {
-//                clothSprite = sprite;
-//            }
-//            break;
-//        }
-//    }
     ClothesPiece *clothSprite = nil;
     CGPoint loc = [self convertToNodeSpace:touchLocation];
     int value = [self getValueAtPoint:loc];
     //CCLOG(@"%i", value);
     switch (value) {
         case 1:
-            clothSprite = [clothesArray objectAtIndex:1];
+            clothSprite = [clothesDictionary objectForKey:@"1"];
             break;
         case 2:
-            clothSprite = [clothesArray objectAtIndex:0];
+            clothSprite = [clothesDictionary objectForKey:@"2"];
             break;
         case 3:
             break;
         default:                       
             break;
     }
-    CCLOG(@"PIECE %@", clothSprite);
     
     PatternButton *patternSprite = nil;
     for (PatternButton *sprite in patterns) {
@@ -281,7 +264,8 @@ enum {
         [self addColorButtons];
         [self addPatternButtons];
         
-        clothesArray = [[CCArray alloc] init];
+        //clothesArray = [[CCArray alloc] init];
+        clothesDictionary = [[NSMutableDictionary alloc] init];
         [self loadPrincess];
         
 //        CCSprite *p = [CCSprite spriteWithFile:@"p9.png"];
@@ -325,11 +309,12 @@ enum {
             piece.z = [[pieceArray objectAtIndex:3] intValue];
             
             ClothesPiece *p = [ClothesPiece node];
-            [p constructPiece:stroke piece:piece touchData:[pDictionary objectForKey:@"touchData"]];
+            [p constructPiece:stroke piece:piece];
             p.position = ccp([[positionArray objectAtIndex:0] floatValue], [[positionArray objectAtIndex:1] floatValue]);
             
             [self addChild:p];
-            [clothesArray addObject:p];
+            //[clothesArray addObject:p];
+            [clothesDictionary setObject:p forKey:[pDictionary objectForKey:@"touchData"]];
         }
     }
 }

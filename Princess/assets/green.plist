@@ -30,6 +30,32 @@
                 <key>sourceSize</key>
                 <string>{439,510}</string>
             </dict>
+            <key>cl_3_green.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{308,1562},{436,305}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{436,305}}</string>
+                <key>sourceSize</key>
+                <string>{436,305}</string>
+            </dict>
+            <key>cl_4_green.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{510,1196},{457,366}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{457,366}}</string>
+                <key>sourceSize</key>
+                <string>{457,366}</string>
+            </dict>
             <key>sh_1_green.png</key>
             <dict>
                 <key>frame</key>
@@ -42,6 +68,32 @@
                 <string>{{0,0},{924,437}}</string>
                 <key>sourceSize</key>
                 <string>{924,437}</string>
+            </dict>
+            <key>sh_3_green.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{0,1562},{438,308}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{438,308}}</string>
+                <key>sourceSize</key>
+                <string>{438,308}</string>
+            </dict>
+            <key>sh_4_green.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{510,828},{459,368}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{459,368}}</string>
+                <key>sourceSize</key>
+                <string>{459,368}</string>
             </dict>
             <key>shoes.png</key>
             <dict>
@@ -66,7 +118,7 @@
             <key>size</key>
             <string>{1024,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:0643589e4cb9b67b69b92719f5c492ab$</string>
+            <string>$TexturePacker:SmartUpdate:cf0ae4df303e3d5c5970a7c39e41e0c6$</string>
             <key>textureFileName</key>
             <string>green.pvr.ccz</string>
         </dict>

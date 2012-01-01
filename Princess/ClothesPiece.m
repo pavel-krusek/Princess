@@ -11,7 +11,7 @@
 
 @implementation ClothesPiece
 
-@synthesize piece, masked, lookupData;
+@synthesize piece, masked;
 
 - (id)init {
     self = [super init];
@@ -21,42 +21,7 @@
     return self;
 }
 
-//- (int) getValueAtPoint:(CGPoint)pt sprite:(CCSprite *)sprite {
-//    int retValue = 255;
-//    
-//    if(lookupData && CGRectContainsPoint([sprite boundingBox], pt)) 
-//    {
-//        pt.y = sprite.contentSize.height - pt.y;
-//        int offset = pt.y * sprite.contentSize.width + pt.x;
-//        NSRange range = {offset,sizeof(Byte)};
-//        NSData *pixelValue = [lookupData subdataWithRange:range];  
-//        
-//        retValue = *(int*)[pixelValue bytes];
-//    }
-//    return retValue;
-//}
-
-- (int) getValueAtPoint:(CGPoint)pt {
-    int retValue = 255;
-    
-    if(lookupData && CGRectContainsPoint([piece boundingBox], pt)) {
-        pt.y = piece.contentSize.height - pt.y;
-        int offset = pt.y * piece.contentSize.width + pt.x;
-        NSRange range = {offset,sizeof(Byte)};
-        NSData *pixelValue = [lookupData subdataWithRange:range];  
-        
-        retValue = *(int*)[pixelValue bytes];
-    }
-    return retValue;
-}
-
-- (void) constructPiece:(Piece)stroke piece:(Piece)p touchData:(NSString *)data {
-    NSString *filePath = 
-    [[NSBundle mainBundle] pathForResource:data ofType:@"raw"];  
-    
-    lookupData = [NSData dataWithContentsOfFile:filePath];
-    [lookupData retain];    
-    
+- (void) constructPiece:(Piece)stroke piece:(Piece)p {
     if (![stroke.source isEqualToString:@"none"]) {
         CCSprite *shadow = [CCSprite spriteWithSpriteFrameName:stroke.source];
         shadow.position = ccp(stroke.xPos, stroke.yPos);

@@ -18,7 +18,8 @@
 @interface HelloWorldLayer : CCLayerColor
 {
     CCArray *colorButtons;
-    CCArray *clothesArray;
+    //CCArray *clothesArray;
+    NSMutableDictionary *clothesDictionary;
     CCArray *patterns;
     
     ColorButton *colorButton;
