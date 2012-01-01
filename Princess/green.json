@@ -1,0 +1,23 @@
+{
+    "princess": [
+                 {
+                 "name": "sukne",
+                 "position": [
+                              4,
+                              90
+                              ],
+                 "stroke": [
+                            "sh_1_green.png",
+                            0,
+                            0,
+                            1
+                            ],
+                 "piece": [
+                           "cl_1_green.png",
+                           19,
+                           23,
+                           2
+                           ]
+                 }
+                 ]
+}

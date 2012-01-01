@@ -61,17 +61,21 @@
 	//	2. depth format of 0 bit. Use 16 or 24 bit for 3d effects, like CCPageTurnTransition
 	//
 	//
-	EAGLView *glView = [EAGLView viewWithFrame:[window bounds]
-								   pixelFormat:kEAGLColorFormatRGB565	// kEAGLColorFormatRGBA8
-								   depthFormat:0						// GL_DEPTH_COMPONENT16_OES
+//	EAGLView *glView = [EAGLView viewWithFrame:[window bounds]
+//								   pixelFormat:kEAGLColorFormatRGB565	// kEAGLColorFormatRGBA8
+//								   depthFormat:0						// GL_DEPTH_COMPONENT16_OES
+//						];
+    EAGLView *glView = [EAGLView viewWithFrame:[window bounds]
+								   pixelFormat:kEAGLColorFormatRGBA8	// kEAGLColorFormatRGBA8
+								   depthFormat:GL_DEPTH_COMPONENT16_OES						// GL_DEPTH_COMPONENT16_OES
 						];
 	
 	// attach the openglView to the director
 	[director setOpenGLView:glView];
 	
 //	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-//	if( ! [director enableRetinaDisplay:YES] )
-//		CCLOG(@"Retina Display Not supported");
+	if( ! [director enableRetinaDisplay:YES] )
+		CCLOG(@"Retina Display Not supported");
 	
 	//
 	// VERY IMPORTANT:
@@ -100,10 +104,12 @@
 	
 	[window makeKeyAndVisible];
 	
+    [CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
 	// You can change anytime.
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+    //[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA4444];
 
 	
 	// Removes the startup flicker
