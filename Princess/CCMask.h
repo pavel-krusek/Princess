@@ -1,36 +1,34 @@
-//
-//  CCMask.h
-//  Princess
-//
-//  Created by Pavel Krusek on 12/19/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
-@interface CCMask : CCSprite {
-    CGSize size;
-    CGPoint screenMid;
+@interface CCMask : CCNode {
+	// the mask
+    CCSprite *maskSprite_;
+	// the object to be masked
+    CCNode *objectSprite_;
     
-    // The given sprites
-    CCSprite *maskSprite;
-    CCSprite *objectSprite;
-    
-    // RenderTextures use for masking
-    CCRenderTexture *maskNegative;
-    CCRenderTexture *masked;
+    // RenderTexture use for masking
+    CCRenderTexture *masked_;
+    CCRenderTexture *maskNegative_;
 }
 
+@property (nonatomic, retain) CCRenderTexture* masked;
+
 // Initialize a masked object based on an object sprite and a mask sprite
-+ (id) createMaskForObject: (CCNode *) object withMask: (CCSprite *) mask;
++ (id) createMaskForObject: (CCNode*) object withMask: (CCSprite*) mask;
++ (CCSprite *) createNegativeMaskSprite:(CCSprite *)mask size:(CGSize)size;
+- (id) initWithObject: (CCNode*) object mask: (CCSprite*) mask;
 
-// Redraw the masked image
-- (void) redrawMasked;
--(void) reRender;
+//change the 'background object'
+- (void) setObject: (CCNode*) object;
+//change the maskSprite
+- (void) setMask: (CCSprite*) mask;
+- (CCSprite*) maskSprite; 
 
-// When dynamic masking is active, you have the ability to change the masked object or the mask itself
-- (void) setObject: (CCSprite *) object;
-- (void) setMask: (CCSprite *) mask;
+- (void) mask;
+- (void) maskWithClear:(float) r g:(float) g b:(float) b a:(float) a;
 
-// Return the masked object as a sprite
-- (CCSprite *) getMaskedSprite;
+//useful for multiple masks in one render texture
+- (void) maskWithoutClear;
+
+//useful for animations or touch/mouse events to create a scratch-off effect
+- (void) reDrawMask;
 
 @end

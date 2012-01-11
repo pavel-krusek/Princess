@@ -1,9 +1,40 @@
 {
     "princess": [
                  {
+                 "name": "sky",
+                 "type": "static",
+                 "asset": "sky.png",
+                 "anchor": [0, 1],
+                 "position": [
+                              446,
+                              768
+                              ]
+                 },
+                 {
+                 "name": "sun",
+                 "type": "static",
+                 "asset": "sun.png",
+                 "anchor": [0.5, 0.5],
+                 "position": [
+                              729,
+                              667
+                              ]
+                 },
+                 {
+                 "name": "room",
+                 "type": "static",
+                 "asset": "room.png",
+                 "anchor": [0, 0],
+                 "position": [
+                              0,
+                              0
+                              ]
+                 },
+                 {
                  "name": "boty",
                  "type": "static",
                  "asset": "shoes.png",
+                 "anchor": [0, 0],
                  "position": [
                               362,
                               100
@@ -42,13 +73,13 @@
                             "sh_1_green.png",
                             0,
                             0,
-                            1
+                            0
                             ],
                  "piece": [
                            "cl_1_green.png",
                            20,
                            25,
-                           2
+                           1
                            ]
                  },
                  {
@@ -63,7 +94,7 @@
                             "sh_3_green.png",
                             0,
                             0,
-                            2
+                            3
                             ],
                  "piece": [
                            "cl_3_green.png",
@@ -84,7 +115,7 @@
                             "sh_4_green.png",
                             0,
                             0,
-                            2
+                            3
                             ],
                  "piece": [
                            "cl_4_green.png",
@@ -106,7 +137,7 @@
                             "sh_5_green.png",
                             0,
                             0,
-                            2
+                            3
                             ],
                  "piece": [
                            "cl_5_green.png",
@@ -127,7 +158,7 @@
                             "sh_6_green.png",
                             0,
                             0,
-                            2
+                            3
                             ],
                  "piece": [
                            "cl_6_green.png",
@@ -140,6 +171,7 @@
                  "name": "leva ruka",
                  "type": "static",
                  "asset": "left_hand.png",
+                 "anchor": [0, 0],
                  "position": [
                               369,
                               312
@@ -157,7 +189,7 @@
                             "sh_7_green.png",
                             0,
                             0,
-                            2
+                            3
                             ],
                  "piece": [
                            "cl_7_green.png",
@@ -178,7 +210,7 @@
                             "sh_8_green.png",
                             0,
                             0,
-                            2
+                            3
                             ],
                  "piece": [
                            "cl_8_green.png",
@@ -191,6 +223,7 @@
                  "name": "krk",
                  "type": "static",
                  "asset": "krk.png",
+                 "anchor": [0, 0],
                  "position": [
                               413,
                               536
@@ -208,7 +241,7 @@
                             "sh_9_green.png",
                             0,
                             0,
-                            2
+                            3
                             ],
                  "piece": [
                            "cl_9_green.png",
@@ -216,6 +249,26 @@
                            1,
                            1
                            ]
+                 },
+                 {
+                 "name": "anim1",
+                 "type": "static",
+                 "asset": "anim_1.png",
+                 "anchor": [0, 0],
+                 "position": [
+                              375,
+                              608
+                              ]
+                 },
+                 {
+                 "name": "ruka",
+                 "type": "static",
+                 "asset": "hand.png",
+                 "anchor": [0, 0],
+                 "position": [
+                              474,
+                              512
+                              ]
                  }
                  ]
 }

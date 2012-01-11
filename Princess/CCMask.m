@@ -1,182 +1,156 @@
 //
 //  CCMask.m
-//  Masking
 //
-//  Created by Gilles Lesire on 22/04/11.
-//  Copyright 2011 iCapps. All rights reserved.
+//  Created by araker on 8/3/11.
+//  MIT LICENSE
 //
 
 #import "CCMask.h"
 
-@interface CCMask(Private)
-
-- (id) initWithObject: (CCSprite *) object mask: (CCSprite *) mask;
-- (void) resetObject;
-- (void) mask;
-
-@end
-
 @implementation CCMask
 
-+ (id) createMaskForObject: (CCSprite *) object withMask: (CCSprite *) mask {
+@synthesize masked = masked_;
+
++ (id) createMaskForObject: (CCNode *) object withMask: (CCSprite *) mask {
 	return [[[self alloc] initWithObject: object mask: mask] autorelease];
 }
 
-- (id) initWithObject: (CCSprite *) object mask: (CCSprite *) mask {
++ (CCSprite *) createNegativeMaskSprite:(CCSprite *)mask size:(CGSize)size {
+	NSAssert(mask != nil, @"Invalid sprite for mask");
+    
+	CCRenderTexture *rt = [CCRenderTexture renderTextureWithWidth:size.width height:size.height];
+
+	[rt beginWithClear:255.0f g:255.0f b:255.0f a:255.0f];
+    
+	glColorMask(0.0f, 0.0f, 0.0f, 1.0f);
+	[mask setBlendFunc: (ccBlendFunc) { GL_ZERO, GL_ONE_MINUS_SRC_ALPHA }];
+	[mask visit];
+	glColorMask(1.0f, 1.0f, 1.0f, 1.0f);
+    
+	[rt end];
+    
+	CCSprite *new_mask = [CCSprite spriteWithTexture:rt.sprite.texture];
+
+	new_mask.flipY = YES;
+    
+	return new_mask;
+}
+
+
+- (id) initWithObject: (CCNode *) object mask: (CCSprite *) mask {
 	NSAssert(object != nil, @"Invalid sprite for object");
     NSAssert(mask != nil, @"Invalid sprite for mask");
     
 	if((self = [super init])) {
-		[self setObject: object];
-		[self setMask: mask];
+		objectSprite_ = [object retain];
+		maskSprite_ = [mask retain]; 
+        
+		// Set up the burn sprite that will "knock out" parts of the darkness layer depending on the alpha value of the pixels in the image.
+		[maskSprite_ setBlendFunc: (ccBlendFunc) { GL_ZERO, GL_ONE_MINUS_SRC_ALPHA }];
         
         // Get window size, we want masking over entire screen don't we?
-		size = [[CCDirector sharedDirector] winSize];
+		CGSize size = [[CCDirector sharedDirector] winSize];
         
         // Create point with middle of screen
-        screenMid = ccp(size.width * 0.5f, size.height * 0.5f);
+        CGPoint screenMid = ccp(size.width * 0.5f, size.height * 0.5f);
         
-        // Create the rendureTextures to create cut outs
-        maskNegative = [CCRenderTexture renderTextureWithWidth: size.width height: size.height];
-        masked = [CCRenderTexture renderTextureWithWidth: size.width height: size.height];
+        // Create the rendureTextures for the mask
+        masked_ = [[CCRenderTexture renderTextureWithWidth: size.width height: size.height] retain];
         
-        // Set render textures at middle of screen
-        maskNegative.position = screenMid;
-        masked.position = screenMid;
+		[[masked_ sprite] setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }];
         
-        // Set correct alpha channel for textures
-        [[maskNegative sprite] setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }];
-        [[masked sprite] setBlendFunc: (ccBlendFunc) { GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA }];
-//        [[[maskNegative sprite] texture] setAliasTexParameters];
-//        [[[masked sprite] texture] setAliasTexParameters];
-        //[[maskNegative sprite] setOpacityModifyRGB:YES];
-        //[[masked sprite] setOpacityModifyRGB:YES];
-        
-        // Load object into RenderTextures
-        [self resetObject];
-        
-        // Mask the object
-        [self mask];
+		// Set render textures at middle of screen
+        masked_.position = screenMid;
         
         // Add the masked object to the screen
-        [self addChild: masked];
+        [self addChild: masked_];
 	}
     
 	return self;
 }
 
-- (void) resetObject {
-    // Clear everyting and begin action for the negative
-    [maskNegative beginWithClear:0 g:0 b:0 a:1.0];
-    //[maskNegative begin];
-
-    // Load sprite
-    [objectSprite visit];
-    
-    // End loading sprites
-    [maskNegative end];
-    
-    // Clear everyting and begin action for masked
-    //[masked beginWithClear:0 g:0 b:0 a:1.0];
-    [masked begin];
-    
-    // Load sprite
-    [objectSprite visit];
-    
-    // End loading sprites
-    [masked end];
+- (void) mask
+{
+	[self maskWithClear:0.0f g:0.0f b:0.0f a:0.0f];
+    //[self maskWithoutClear];
 }
 
-- (void) redrawMasked {
-    // Put object back on the screen
-    [self resetObject];
+- (void) maskWithClear:(float) r g:(float) g b:(float) b a:(float) a {
     
-    // Cut out the parts we don't want to see
-    [self mask];
+    [masked_ beginWithClear:r g:g b:b a:a];
+	// Limit drawing to the alpha channel
     
-    for (CCSprite *sprite in self.children) {
-        CCLOG(@"SPRITE %@", sprite);
-//        if (sprite.visible) {
-//            //do something
-//        }
-    }
-}
-
-- (void) reRender {
+	[objectSprite_ visit];
     
-    [self resetObject];
+	glColorMask(0.0f, 0.0f, 0.0f, 1.0f);
     
-    [self removeChild:maskNegative cleanup:YES];
-    [self removeChild:masked cleanup:YES];
-    [self mask];
-    [self addChild:masked];
-}
-
-- (void) mask {
-    // Set up the burn sprite that will "knock out" parts of the darkness layer depending on the alpha value of the pixels in the image.
-    [maskSprite setBlendFunc: (ccBlendFunc) {  GL_ZERO, GL_ONE_MINUS_SRC_ALPHA }];
-    //[maskSprite setBlendFunc: (ccBlendFunc) {  GL_ONE, GL_ZERO }];
-    [maskSprite setOpacityModifyRGB:NO];
-    [maskSprite retain];
-    
-    // Start cutting out the parts we want to show
-    [maskNegative begin];
-    
-    // Limit drawing to the alpha channel
-    glColorMask(0.0f, 0.0f, 0.0f, 1.0f);
-    
-    // Draw
-    [maskSprite visit];
+    // Draw mask
+    [maskSprite_ visit];
     
     // Reset color mask
     glColorMask(1.0f, 1.0f, 1.0f, 1.0f);
     
-    [maskNegative end];
+    [masked_ end];
+}
+
+- (void) maskWithoutClear
+{
+	[masked_ begin];	
     
-    //[self addChild: maskNegative];
-    [maskNegative retain];
+	[objectSprite_ visit];
+	// Limit drawing to the alpha channel
+	glColorMask(0.0f, 0.0f, 0.0f, 1.0f);
     
-    // Create a temporary mask of the left cut out
-    CCSprite *maskCut = maskNegative.sprite;
-    maskCut.position = screenMid;
-    
-    // Set up the burn sprite that will "knock out" parts of the darkness layer depending on the alpha value of the pixels in the image.
-    [maskCut setBlendFunc: (ccBlendFunc) { GL_ZERO, GL_ONE_MINUS_SRC_ALPHA }];
-    //[maskCut setBlendFunc: (ccBlendFunc) {  GL_ONE, GL_ZERO }];
-    [maskCut setOpacityModifyRGB:NO];
-    [maskCut retain];
-    
-    [masked begin];
-    
-    // Limit drawing to the alpha channel
-    glColorMask(0.0f, 0.0f, 0.0f, 1.0f);
-    
-    // Draw
-    [maskCut visit];
+    // Draw mask
+    [maskSprite_ visit];
     
     // Reset color mask
     glColorMask(1.0f, 1.0f, 1.0f, 1.0f);
     
-    [masked end];
+    [masked_ end];
+}
+
+- (void) reDrawMask
+{
+	//presume object is already drawed in a previous frame 
+    
+	[masked_ begin];
+	// Limit drawing to the alpha channel
+    
+	glColorMask(0.0f, 0.0f, 0.0f, 1.0f);
+    
+    // Draw mask
+    [maskSprite_ visit];
+    
+    // Reset color mask
+    glColorMask(1.0f, 1.0f, 1.0f, 1.0f);
+    
+    [masked_ end];
+    
 }
 
 - (void) setObject: (CCSprite *) object {
-    objectSprite = object;
-    [objectSprite retain];
+	[objectSprite_ release];
+	objectSprite_ = [object retain];
 }
 
 - (void) setMask: (CCSprite *) mask {
-    maskSprite = mask;
-    [maskSprite retain];
+	[maskSprite_ release];
+	maskSprite_ = [mask retain];
+	[maskSprite_ setBlendFunc: (ccBlendFunc) { GL_ZERO, GL_ONE_MINUS_SRC_ALPHA }];
+    //[maskSprite_ setBlendFunc: (ccBlendFunc) { GL_ONE, GL_ZERO }];
 }
 
-- (CCSprite *) getMaskedSprite {
-    return masked.sprite;
+- (CCSprite*) maskSprite
+{
+	return maskSprite_;
 }
 
 - (void) dealloc {
-    [maskNegative release];
-    [masked release];
+    
+    [masked_ release];
+	[maskSprite_ release];
+	[objectSprite_ release];
     
     [super dealloc];
 }

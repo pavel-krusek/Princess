@@ -9,12 +9,7 @@
 #import "CCMask.h"
 
 @interface ClothesPiece : CCLayer {
-    CCSprite *piece;
     CCSprite *mask;
-    CCMask *masked;
-    
-//    CCSprite *selPattern;
-//    CCArray *patterns;
 }
 
 @property (nonatomic, assign) CCSprite *piece;

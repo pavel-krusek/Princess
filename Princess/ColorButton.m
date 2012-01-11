@@ -106,8 +106,7 @@
             break;
     }
         
-    self = [super initWithSpriteFrameName:imageFile];
-    [imageFile release];
+    self = [[super initWithSpriteFrameName:imageFile] autorelease];
     
     id scaling = [CCSequence actions:
                   [CCScaleTo actionWithDuration:[self getRandomNumber:15 to:30]/10 scale:1.13],
@@ -117,6 +116,11 @@
     [self runAction:[CCRepeatForever actionWithAction:scaling]];
     
     return self;
+}
+
+- (void) dealloc {
+    CCLOG(@"debug: %@: %@", NSStringFromSelector(_cmd), self);
+    [super dealloc];
 }
 
 @end

@@ -19,18 +19,14 @@
 
 - (UIImage *) screenshotUIImage {
 	CGSize displaySize	= [self displaySizeInPixels];
-	CGSize winSize		= [self winSizeInPixels];
+	CGSize winSize = [self winSizeInPixels];
     
-	//Create buffer for pixels
 	GLuint bufferLength = displaySize.width * displaySize.height * 4;
 	GLubyte* buffer = (GLubyte*)malloc(bufferLength);
     
-	//Read Pixels from OpenGL
 	glReadPixels(0, 0, displaySize.width, displaySize.height, GL_RGBA, GL_UNSIGNED_BYTE, buffer);
-	//Make data provider with data.
 	CGDataProviderRef provider = CGDataProviderCreateWithData(NULL, buffer, bufferLength, NULL);
     
-	//Configure image
 	int bitsPerComponent = 8;
 	int bitsPerPixel = 32;
 	int bytesPerRow = 4 * displaySize.width;
@@ -66,7 +62,7 @@
 	CGImageRef imageRef = CGBitmapContextCreateImage(context);
 	UIImage *outputImage = [[[UIImage alloc] initWithCGImage:imageRef] autorelease];
     
-	//Dealloc
+	//dealloc
 	CGImageRelease(imageRef);
 	CGDataProviderRelease(provider);
 	CGImageRelease(iref);

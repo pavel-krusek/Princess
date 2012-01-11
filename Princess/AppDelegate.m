@@ -10,8 +10,9 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "HelloWorldLayer.h"
+#import "Princess.h"
 #import "RootViewController.h"
+#import "PrincessManager.h"
 
 @implementation AppDelegate
 
@@ -110,9 +111,12 @@
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
-	
-	// Run the intro Scene
-	[[CCDirector sharedDirector] runWithScene: [HelloWorldLayer scene]];
+    //common assets
+    [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"assets.plist"];
+
+    [[PrincessManager sharedPrincessManager] runPrincessScene:@"green"];
+    //[[CCDirector sharedDirector] runWithScene: [Princess scene:@"green"]];
+    
 }
 
 
